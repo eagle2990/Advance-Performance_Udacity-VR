@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour
 {
     public GameManager gameManager;
+    private int oldScore;
     Text text;
 
     // Use this for initialization
@@ -19,6 +20,15 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = "Score: " + gameManager.score;
+        if (gameManager.score != oldScore)
+        {
+            oldScore = gameManager.score;
+            ChangeScoreUI();
+        }
+    }
+
+    private void ChangeScoreUI()
+    {
+        text.text = "Score: " + gameManager.score.ToString();
     }
 }

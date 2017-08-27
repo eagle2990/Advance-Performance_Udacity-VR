@@ -22,30 +22,21 @@ public class BallSpawner : MonoBehaviour
 
     void Start()
     {
-        //Create Bullet Pool
-        //pooledBalls = new List<GameObject>();
-        //for (int i = 0; i < ballsAmount; i++)
-        //{
-        //    GameObject obj = Instantiate(pooledBall);
-        //    obj.SetActive(false);
-        //    pooledBalls.Add(obj);
-        //}
-        //cooldown = cooldownLength;
-        if (pooledBalls == null)
-        {
-            pooledBalls = new List<GameObject>(ballsAmount);
-        }
-
+        //Create Bullet Pool     
+        cooldown = cooldownLength;
+        pooledBalls = new List<GameObject>(GameObject.FindGameObjectsWithTag("Throwable"));
 
         if (pooledBalls.Count == 0)
         {
-            foreach (Transform child in transform)
+            for (int i = 0; i < ballsAmount; i++)
             {
-                if (child.gameObject.CompareTag("Throwable"))
-                {
-                    pooledBalls.Add(child.gameObject);
-                }
+                GameObject obj = Instantiate(pooledBall);
+                obj.SetActive(false);
+                pooledBalls.Add(obj);
             }
+        } else
+        {
+            ballsAmount = pooledBalls.Count;
         }
     }
 
@@ -76,7 +67,7 @@ public class BallSpawner : MonoBehaviour
 
     void SpawnBall()
     {
-        GameObject selectedBall = BallSpawner.current.GetPooledBall();
+        GameObject selectedBall = GetPooledBall();
         selectedBall.transform.position = transform.position;
         selectedBall.SetActive(true);
         selectedBall.GetComponent<Rigidbody>().WakeUp();
