@@ -24,7 +24,8 @@ public class BallSpawner : MonoBehaviour
     {
         //Create Bullet Pool     
         cooldown = cooldownLength;
-        pooledBalls = new List<GameObject>(GameObject.FindGameObjectsWithTag("Throwable"));
+        if (pooledBalls == null)
+            pooledBalls = new List<GameObject>(GameObject.FindGameObjectsWithTag("Throwable"));
 
         if (pooledBalls.Count == 0)
         {
@@ -34,7 +35,8 @@ public class BallSpawner : MonoBehaviour
                 obj.SetActive(false);
                 pooledBalls.Add(obj);
             }
-        } else
+        }
+        else
         {
             ballsAmount = pooledBalls.Count;
         }
@@ -42,7 +44,7 @@ public class BallSpawner : MonoBehaviour
 
     public GameObject GetPooledBall()
     {
-        
+
         while (pooledBalls[ballPoolNum].activeInHierarchy)
         {
             ballPoolNum++;
