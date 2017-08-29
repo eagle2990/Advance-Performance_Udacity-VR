@@ -7,8 +7,6 @@
 /Assets/AssetStoreTools*
 /Assets/GoogleVR/
 /Assets/Plugins/
-/Assets/SteamVR/
-/Assets/OVR/
 
 # Visual Studio 2015 cache directory
 /.vs/
@@ -42,5 +40,3 @@ sysinfo.txt
 #VR Assets Store files
 Plugins.meta
 GoogleVR.meta
-SteamVR.meta
-OVR.meta
